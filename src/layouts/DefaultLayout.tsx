@@ -1,9 +1,14 @@
 import { Link, Outlet } from 'react-router-dom'
-import { BackgroundContainer, Container, Image, ImageLogo } from './styles'
+import {
+  BackgroundContainer,
+  ContainerBackground,
+  Image,
+  ImageLogo,
+} from './styles'
 
 export function DefaultLayout() {
   return (
-    <Container>
+    <ContainerBackground>
       <BackgroundContainer>
         <Image
           src="../../public/images/left-effect.png"
@@ -18,6 +23,6 @@ export function DefaultLayout() {
         />
       </BackgroundContainer>
       <Outlet />
-    </Container>
+    </ContainerBackground>
   )
 }
