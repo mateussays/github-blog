@@ -1,15 +1,18 @@
 import { Link, Outlet } from 'react-router-dom'
-import { BackgroundContainer, Container } from './styles'
+import { BackgroundContainer, Container, Image, ImageLogo } from './styles'
 
 export function DefaultLayout() {
   return (
     <Container>
       <BackgroundContainer>
-        <img src="../../public/images/left-effect.png" alt="Background Image" />
+        <Image
+          src="../../public/images/left-effect.png"
+          alt="Background Image"
+        />
         <Link to="/">
-          <img src="../../public/images/logo.png" alt="Logo" />
+          <ImageLogo src="../../public/images/logo.png" alt="Logo" />
         </Link>
-        <img
+        <Image
           src="../../public/images/right-effect.png"
           alt="Background Image"
         />
