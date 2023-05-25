@@ -10,8 +10,8 @@ const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
 
   body {
     background-color: ${(props) => props.theme['base-background']};
-    color: ${(props) => props.theme['base-text']};
     -webkit-font-smoothing: antialiased;
+    font-family: 'nunito', sans-serif;
   }
 `
 
