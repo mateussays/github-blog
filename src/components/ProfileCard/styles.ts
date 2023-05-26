@@ -7,6 +7,7 @@ export const ContainerBackground = styled(Container)(() => ({
   '&.MuiContainer-root ': {
     display: 'flex',
     maxWidth: '100%',
+    padding: '0',
   },
 }))
 

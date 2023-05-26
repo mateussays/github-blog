@@ -58,7 +58,7 @@ export function ProfileCard() {
                   {userProfile?.name}
                 </Typography>
                 <Link
-                  href={userProfile?.url}
+                  href={userProfile?.html_url}
                   sx={{
                     fontFamily: 'nunito, sans-serif',
                     fontSize: '0.75rem',
