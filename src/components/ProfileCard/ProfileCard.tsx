@@ -10,20 +10,13 @@ import {
   TextInfoIcons,
   TextInfoIconsContainer,
 } from './styles'
-import { useContext, useEffect, useState } from 'react'
-import { GithubContext } from '../../contexts/GithubContext'
+import { useContext } from 'react'
 import theme from '../../styles/themes/default'
 import { Buildings, GithubLogo, Share, Users } from 'phosphor-react'
+import GithubContext from '../../contexts/GithubContext'
 
 export function ProfileCard() {
-  const { userProfile } = useContext(GithubContext)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    if (userProfile) {
-      setIsLoading(false)
-    }
-  }, [userProfile])
+  const { userProfile, isLoading } = useContext(GithubContext)
 
   return (
     <ContainerBackground>

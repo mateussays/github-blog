@@ -1,8 +1,11 @@
-import { Typography } from '@mui/material'
+import { Skeleton, Typography } from '@mui/material'
 import { InputContainer, InputSearch, TextContainer } from './styles'
 import theme from '../../styles/themes/default'
+import { useContext } from 'react'
+import GithubContext from '../../contexts/GithubContext'
 
 export function SearchInput() {
+  const { userPosts, isLoading } = useContext(GithubContext)
   return (
     <InputContainer>
       <TextContainer>
@@ -25,10 +28,22 @@ export function SearchInput() {
             color: theme['base-span'],
             fontWeight: '400',
             lineHeight: '1.375rem',
-            marginLeft: '0.125rem',
+            marginRight: '0.125rem',
           }}
         >
-          6 publicações
+          {isLoading ? (
+            <Skeleton
+              variant="text"
+              width={100}
+              height={20}
+              sx={{
+                bgcolor: `${theme['base-post']}`,
+                borderRadius: '0.625rem',
+              }}
+            />
+          ) : (
+            `${userPosts?.total_count} publicações`
+          )}
         </Typography>
       </TextContainer>
       <InputSearch placeholder="Buscar conteúdo" />

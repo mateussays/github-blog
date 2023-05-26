@@ -1,65 +1,13 @@
-import React, { useEffect, useState, ReactNode, createContext } from 'react'
-import { getProfileGithub } from '../services/http'
+import React, { useEffect, useState, createContext } from 'react'
+import { getProfileGithub, searchIAllssuesGithub } from '../services/http'
+import { ProfileProps, UserProfileChildren } from '../types/services.types'
 
-interface UserProfileResponse {
-  login: string
-  id: number
-  node_id: string
-  avatar_url: string
-  gravatar_id: string
-  url: string
-  html_url: string
-  followers_url: string
-  following_url: string
-  gists_url: string
-  starred_url: string
-  subscriptions_url: string
-  organizations_url: string
-  repos_url: string
-  events_url: string
-  received_events_url: string
-  type: string
-  site_admin: boolean
-  name: string
-  company: string
-  blog: string
-  location: string | null
-  email: string | null
-  hireable: boolean | null
-  bio: string
-  twitter_username: string | null
-  public_repos: number
-  public_gists: number
-  followers: number
-  following: number
-  created_at: string
-  updated_at: string
-  private_gists: number
-  total_private_repos: number
-  owned_private_repos: number
-  disk_usage: number
-  collaborators: number
-  two_factor_authentication: boolean
-  plan: {
-    name: string
-    space: number
-    collaborators: number
-    private_repos: number
-  }
-}
-
-interface UserProfileChildren {
-  userProfile?: UserProfileResponse
-}
-
-interface ProfileProps {
-  children: ReactNode
-}
-
-export const GithubContext = createContext({} as UserProfileChildren)
+const GithubContext = createContext({} as UserProfileChildren)
 
 export const GithubProvider: React.FC<ProfileProps> = ({ children }) => {
   const [userProfile, setUserProfile] = useState()
+  const [userPosts, setUserPosts] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -73,9 +21,31 @@ export const GithubProvider: React.FC<ProfileProps> = ({ children }) => {
     fetchUserProfile()
   }, [])
 
+  useEffect(() => {
+    const fetchPostsProfile = async () => {
+      // Aguardar dois segundos antes de fazer a chamada
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      const response = await searchIAllssuesGithub({ text: '' })
+      setUserPosts(response)
+    }
+
+    fetchPostsProfile()
+  }, [])
+
+  useEffect(() => {
+    if (userProfile && userPosts) {
+      setIsLoading(false)
+    }
+  }, [userProfile, setIsLoading, userPosts])
+
   return (
-    <GithubContext.Provider value={{ userProfile }}>
+    <GithubContext.Provider
+      value={{ userProfile, userPosts, isLoading, setIsLoading }}
+    >
       {children}
     </GithubContext.Provider>
   )
 }
+
+export default GithubContext
