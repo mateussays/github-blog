@@ -10,6 +10,7 @@ import { useContext } from 'react'
 import GithubContext from '../../contexts/GithubContext'
 import theme from '../../styles/themes/default'
 import formaterDate from '../../utils/formaterDate'
+import { Link } from 'react-router-dom'
 
 export function PostCard() {
   const { userPosts, isLoading } = useContext(GithubContext)
@@ -51,40 +52,45 @@ export function PostCard() {
                 />
               </Card>
             ) : (
-              <Card>
-                <TitlesCardContent>
-                  <Box
-                    sx={{
-                      width: '17rem',
-                    }}
-                  >
-                    <Typography
+              <Link
+                to={`/post/${post.number}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <Card>
+                  <TitlesCardContent>
+                    <Box
                       sx={{
-                        color: theme['base-title'],
-                        fontFamily: 'Nunito, sans-serif',
-                        fontSize: '1rem',
-                        fontWeight: '700',
+                        width: '17rem',
                       }}
                     >
-                      {post.title}
+                      <Typography
+                        sx={{
+                          color: theme['base-title'],
+                          fontFamily: 'Nunito, sans-serif',
+                          fontSize: '1rem',
+                          fontWeight: '700',
+                        }}
+                      >
+                        {post.title}
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontFamily: 'nunito, sans-serif',
+                        fontSize: '0.875rem',
+                        color: theme['base-span'],
+                        fontWeight: '400',
+                        lineHeight: '1.375rem',
+                      }}
+                    >
+                      {formaterDate(post.created_at)}
                     </Typography>
-                  </Box>
-                  <Typography
-                    sx={{
-                      fontFamily: 'nunito, sans-serif',
-                      fontSize: '0.875rem',
-                      color: theme['base-span'],
-                      fontWeight: '400',
-                      lineHeight: '1.375rem',
-                    }}
-                  >
-                    {formaterDate(post.created_at)}
-                  </Typography>
-                </TitlesCardContent>
-                <TextContainer>
-                  <Text>{post.body}</Text>
-                </TextContainer>
-              </Card>
+                  </TitlesCardContent>
+                  <TextContainer>
+                    <Text>{post.body}</Text>
+                  </TextContainer>
+                </Card>
+              </Link>
             )}
           </Grid>
         ))}
