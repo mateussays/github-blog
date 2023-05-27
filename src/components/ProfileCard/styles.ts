@@ -11,7 +11,7 @@ export const ContainerBackground = styled(Container)(() => ({
   },
 }))
 
-export const ProfileCardContainer = styled(Card)(({ theme }) => ({
+export const ProfileCardContainer = styled(Card)(() => ({
   width: '54rem',
   padding: '2rem 2.5rem',
   marginTop: '-2.5rem',

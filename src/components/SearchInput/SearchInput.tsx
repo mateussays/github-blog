@@ -4,7 +4,7 @@ import theme from '../../styles/themes/default'
 import { useContext } from 'react'
 import GithubContext from '../../contexts/GithubContext'
 
-export function SearchInput() {
+export default function SearchInput() {
   const { userPosts, isLoading, searchText, setSearchText, setShouldSearch } =
     useContext(GithubContext)
   return (

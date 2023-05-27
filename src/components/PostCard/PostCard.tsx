@@ -12,7 +12,7 @@ import theme from '../../styles/themes/default'
 import formaterDate from '../../utils/formaterDate'
 import { Link } from 'react-router-dom'
 
-export function PostCard() {
+export default function PostCard() {
   const { userPosts, isLoading } = useContext(GithubContext)
   return (
     <CardContainer>
@@ -52,10 +52,7 @@ export function PostCard() {
                 />
               </Card>
             ) : (
-              <Link
-                to={`/post/${post.number}`}
-                style={{ textDecoration: 'none' }}
-              >
+              <Link to={`/post/${post.id}`} style={{ textDecoration: 'none' }}>
                 <Card>
                   <TitlesCardContent>
                     <Box

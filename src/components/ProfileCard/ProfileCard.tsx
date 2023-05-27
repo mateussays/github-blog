@@ -15,7 +15,7 @@ import theme from '../../styles/themes/default'
 import { Buildings, GithubLogo, Share, Users } from 'phosphor-react'
 import GithubContext from '../../contexts/GithubContext'
 
-export function ProfileCard() {
+export default function ProfileCard() {
   const { userProfile, isLoading } = useContext(GithubContext)
 
   return (

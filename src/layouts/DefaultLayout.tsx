@@ -6,7 +6,7 @@ import {
   ImageLogo,
 } from './styles'
 
-export function DefaultLayout() {
+export default function DefaultLayout() {
   return (
     <ContainerBackground>
       <BackgroundContainer>
