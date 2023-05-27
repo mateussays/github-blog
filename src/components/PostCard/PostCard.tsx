@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import {
   Card,
   CardContainer,
@@ -12,7 +12,7 @@ import theme from '../../styles/themes/default'
 import formaterDate from '../../utils/formaterDate'
 
 export function PostCard() {
-  const { userPosts } = useContext(GithubContext)
+  const { userPosts, isLoading } = useContext(GithubContext)
   return (
     <CardContainer>
       <Grid
@@ -22,40 +22,70 @@ export function PostCard() {
       >
         {userPosts?.items.map((post) => (
           <Grid item xs={6} key={post.id}>
-            <Card>
-              <TitlesCardContent>
-                <Box
+            {isLoading ? (
+              <Card>
+                <Skeleton
+                  variant="rectangular"
                   sx={{
-                    width: '17rem',
+                    bgcolor: `${theme['base-post']}`,
+                    borderRadius: '0.625rem',
                   }}
-                >
-                  <Typography
+                />
+                <Skeleton
+                  variant="text"
+                  width={350}
+                  height={20}
+                  sx={{
+                    bgcolor: `${theme['base-label']}`,
+                    borderRadius: '0.625rem',
+                  }}
+                />
+                <Skeleton
+                  variant="text"
+                  width={350}
+                  height={150}
+                  sx={{
+                    bgcolor: `${theme['base-label']}`,
+                    borderRadius: '0.625rem',
+                  }}
+                />
+              </Card>
+            ) : (
+              <Card>
+                <TitlesCardContent>
+                  <Box
                     sx={{
-                      color: theme['base-title'],
-                      fontFamily: 'Nunito, sans-serif',
-                      fontSize: '1rem',
-                      fontWeight: '700',
+                      width: '17rem',
                     }}
                   >
-                    {post.title}
+                    <Typography
+                      sx={{
+                        color: theme['base-title'],
+                        fontFamily: 'Nunito, sans-serif',
+                        fontSize: '1rem',
+                        fontWeight: '700',
+                      }}
+                    >
+                      {post.title}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: 'nunito, sans-serif',
+                      fontSize: '0.875rem',
+                      color: theme['base-span'],
+                      fontWeight: '400',
+                      lineHeight: '1.375rem',
+                    }}
+                  >
+                    {formaterDate(post.created_at)}
                   </Typography>
-                </Box>
-                <Typography
-                  sx={{
-                    fontFamily: 'nunito, sans-serif',
-                    fontSize: '0.875rem',
-                    color: theme['base-span'],
-                    fontWeight: '400',
-                    lineHeight: '1.375rem',
-                  }}
-                >
-                  {formaterDate(post.created_at)}
-                </Typography>
-              </TitlesCardContent>
-              <TextContainer>
-                <Text>{post.body}</Text>
-              </TextContainer>
-            </Card>
+                </TitlesCardContent>
+                <TextContainer>
+                  <Text>{post.body}</Text>
+                </TextContainer>
+              </Card>
+            )}
           </Grid>
         ))}
       </Grid>

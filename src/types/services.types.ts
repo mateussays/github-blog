@@ -132,6 +132,9 @@ export interface UserProfileChildren {
   userPosts?: Repository
   isLoading: boolean
   setIsLoading: (value: boolean) => void
+  searchText: string
+  setSearchText: (value: string) => void
+  setShouldSearch: (value: boolean) => void
 }
 
 export interface ProfileProps {

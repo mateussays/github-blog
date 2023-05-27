@@ -5,7 +5,8 @@ import { useContext } from 'react'
 import GithubContext from '../../contexts/GithubContext'
 
 export function SearchInput() {
-  const { userPosts, isLoading } = useContext(GithubContext)
+  const { userPosts, isLoading, searchText, setSearchText, setShouldSearch } =
+    useContext(GithubContext)
   return (
     <InputContainer>
       <TextContainer>
@@ -46,7 +47,13 @@ export function SearchInput() {
           )}
         </Typography>
       </TextContainer>
-      <InputSearch placeholder="Buscar conteúdo" />
+      <InputSearch
+        placeholder="Buscar conteúdo"
+        type="text"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        onBlur={() => setShouldSearch(true)}
+      />
     </InputContainer>
   )
 }
